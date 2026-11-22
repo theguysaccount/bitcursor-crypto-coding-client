@@ -1,6 +1,6 @@
 ---
 name: audit
-description: Scan the current smart-contract project (Solidity or Anchor) with Chain Preflight's quick checks and the installed open-source analyzers (Slither, Aderyn, Solhint, cargo-audit), explain every finding and propose fixes. Use when the user asks to audit, scan or security-check contracts, or before a deploy.
+description: Scan the current smart-contract project (Solidity or Anchor) with Chain Preflight's quick checks and the installed open-source analyzers (Slither, Solhint, cargo-audit; Aderyn where still installed), explain every finding and propose fixes. Use when the user asks to audit, scan or security-check contracts, or before a deploy.
 argument-hint: "[path]"
 ---
 

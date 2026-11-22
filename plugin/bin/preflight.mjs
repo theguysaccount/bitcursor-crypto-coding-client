@@ -56,7 +56,10 @@ async function main() {
   if (cmd === "doctor") {
     const { doctor } = await import("../lib/analyzers.mjs");
     console.log("Chain Preflight's quick checks are built in. Analyzers it runs when installed:\n");
-    for (const t of doctor()) console.log(`${t.installed ? "✓" : "✗"} ${t.tool}${t.version ? ` ${t.version}` : ""}${t.installed ? "" : `\n    install: ${t.install}`}`);
+    for (const t of doctor()) {
+      if (t.retired) console.log(`${t.installed ? "✓" : "–"} ${t.tool}${t.version ? ` ${t.version}` : ""}\n    ${t.retired}`);
+      else console.log(`${t.installed ? "✓" : "✗"} ${t.tool}${t.version ? ` ${t.version}` : ""}${t.installed ? "" : `\n    install: ${t.install}`}`);
+    }
     return;
   }
   if (cmd === "rules") {

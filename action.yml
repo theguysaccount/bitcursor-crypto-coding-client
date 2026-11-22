@@ -12,7 +12,7 @@ inputs:
     description: Fail the step on findings of this severity or worse (high, medium, low, none)
     default: high
   analyzers:
-    description: Run the analyzers installed on the runner (Slither, Aderyn, Solhint, cargo-audit). Install them in earlier steps.
+    description: Run the analyzers installed on the runner (Slither, Solhint, cargo-audit; Aderyn if present). Install them in earlier steps.
     default: "true"
 outputs:
   report:

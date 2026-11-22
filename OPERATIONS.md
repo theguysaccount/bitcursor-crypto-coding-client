@@ -15,7 +15,7 @@ users' code never reaches this project.
 | Job | Workflow | When | What it does | How it fails safe |
 |---|---|---|---|---|
 | Deploy | `pages.yml` | every push to `main`; by hand; after a compatibility update | Unit tests (every rule on the vulnerable and safe samples, deploy-command detection, analyzer adapters on real Slither and Solhint output, the scanner, the hook's stdin/stdout for Claude Code and Cursor); plugin manifest checks and a hook smoke test; builds; drives the checker in headless Chrome at desktop and phone widths; loads every page at both widths; deploys; waits for the live commit; repeats the browser tests live; pings IndexNow | A failure before `deploy` leaves the last good site live. |
-| Analyzer compatibility | `compat.yml` | Wednesdays 06:37 and Saturdays 18:11 UTC; by hand | Installs the latest Slither (+ solc, Foundry), Solhint, cargo-audit and Aderyn; scans the vulnerable samples and the safe contract; checks Slither still finds reentrancy-eth, controlled-delegatecall and tx-origin, Solhint finds avoid-tx-origin, Aderyn finds a high issue, cargo-audit runs, and nobody flags the safe contract high; writes `site/data/compat.json` only when a version or result changed, commits, and dispatches a deploy | An analyzer that fails to install is a warning and keeps its last recorded result. One that stops finding known bugs (or flags the safe contract) fails the job and opens an `ops-alert` issue. Re-runs don't churn: unchanged results aren't committed. |
+| Analyzer compatibility | `compat.yml` | Wednesdays 06:37 and Saturdays 18:11 UTC; by hand | Installs the latest Slither (+ solc, Foundry), Solhint and cargo-audit; scans the vulnerable samples and the safe contract; checks Slither still finds reentrancy-eth, controlled-delegatecall and tx-origin, Solhint finds avoid-tx-origin, cargo-audit runs, and nobody flags the safe contract high; writes `site/data/compat.json` only when a version or result changed, commits, and dispatches a deploy | An analyzer that fails to install is a warning and keeps its last recorded result. One that stops finding known bugs (or flags the safe contract) fails the job and opens an `ops-alert` issue. Re-runs don't churn: unchanged results aren't committed. |
 | Self-test | `selftest.yml` | Mondays 09:29 and Thursdays 21:53 UTC; by hand | Unit tests; plugin checks; Claude Code's own `claude plugin validate --strict` (CLI from npm; a failed install is a warning); the GitHub Action passes the safe sample and fails the vulnerable one; live health (every sitemap URL 200 with its own canonical, `checker.js` matches `version.json`, `rules.json` matches the repo's rules); **staleness** (live build not the current `main` after an hour → dispatches a deploy and fails; last successful scheduled self-test over 10 days → warning); the checker on the live site at two widths | Read-only apart from the redeploy dispatch. Failures open or comment on one `ops-alert` issue. |
 | Keep-alive | `selftest.yml` and `compat.yml` → `scripts/keepalive.sh` | every run of either | Re-enables scheduled workflows (not ones disabled by hand); empty `[skip ci]` commit after 45 quiet days | GitHub disables schedules after 60 days without activity. |
 | CI | `ci.yml` | pull requests, other branches | The deploy's tests plus the action test | |
@@ -32,8 +32,10 @@ schedule-triggered run has passed (it would come back on the same dates next yea
   `tests/fixtures/`) and the expectations in `scripts/compat.mjs`.
 - **Issues labelled `accuracy`**: false positives and missed bugs. Each fix is a rule change in
   `plugin/lib/rules.js` plus a test case.
-- **Install-command changes** upstream (Aderyn's installer moved in 2026; npm doesn't carry it). The
-  `INSTALL` table in `plugin/lib/analyzers.mjs` feeds `doctor`, reports and the docs.
+- **Install-command changes and retirements** upstream. The `INSTALL` table in `plugin/lib/analyzers.mjs`
+  feeds `doctor`, reports and the docs. Cyfrin retired **Aderyn** on 2026-11-13 and withdrew every install path
+  (crates.io yanked, binaries, npm, Homebrew); it now sits in `RETIRED`, runs only where already installed and
+  is never reported missing. Move any other analyzer there the same way if its maker withdraws it.
 
 ## Run anything by hand
 

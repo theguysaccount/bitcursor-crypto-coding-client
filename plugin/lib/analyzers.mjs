@@ -1,6 +1,6 @@
 // Adapters for the open-source analyzers Chain Preflight runs when they're installed:
 //   Slither (EVM, Trail of Bits, AGPL-3.0)   pip install slither-analyzer  (+ solc-select, or forge/hardhat)
-//   Aderyn  (EVM, Cyfrin, GPL-3.0)           cargo install aderyn  /  cyfrinup
+//   Aderyn  (EVM, Cyfrin, GPL-3.0)           retired upstream on 2026-11-13: runs only where already installed
 //   Solhint (EVM, Protofire, MIT)            npm install -g solhint
 //   cargo-audit (Rust/Anchor, RustSec)       cargo install cargo-audit
 // None are bundled: they run as separate programs, and a missing one is reported, never fatal.
@@ -11,9 +11,14 @@ import { spawn, spawnSync } from "node:child_process";
 
 export const INSTALL = {
   slither: "pip install slither-analyzer solc-select  (then: solc-select install 0.8.28 && solc-select use 0.8.28)",
-  aderyn: "cargo install aderyn   (or: curl -L https://raw.githubusercontent.com/Cyfrin/up/main/install | bash && cyfrinup)",
   solhint: "npm install -g solhint",
   "cargo-audit": "cargo install cargo-audit",
+};
+
+// Analyzers whose makers withdrew every install path. They still run where someone already has them, but
+// Chain Preflight never asks anyone to install them and doesn't count them as missing.
+export const RETIRED = {
+  aderyn: "Retired by Cyfrin on 2026-11-13 and no longer installable. An installation you already have still runs.",
 };
 
 export function which(cmd, env = process.env) {
@@ -178,7 +183,7 @@ async function runSlither(root, kind, files, opts) {
 
 async function runAderyn(root, kind, files, opts) {
   const bin = which("aderyn", opts.env);
-  if (!bin) return { tool: "aderyn", status: "missing", install: INSTALL.aderyn, findings: [] };
+  if (!bin) return { tool: "aderyn", status: "missing", install: RETIRED.aderyn, findings: [] };
   const v = version(bin);
   const outFile = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "preflight-aderyn-")), "report.json");
   const r = await run(bin, [root, "--output", outFile], { cwd: root, timeoutMs: opts.timeoutMs });
@@ -234,7 +239,8 @@ const RUNNERS = { slither: runSlither, aderyn: runAderyn, solhint: runSolhint, "
 /** Run the analyzers that fit the project. `only` limits which; missing tools are reported, not fatal. */
 export async function runAnalyzers(root, { kind = "unknown", solFiles = [], rustFiles = [], only = null, timeoutMs = 180000, env = process.env } = {}) {
   const names = [];
-  if (solFiles.length) names.push("slither", "aderyn", "solhint");
+  // Aderyn is retired: run it where it's installed (or asked for by name), never report it as missing.
+  if (solFiles.length) names.push("slither", ...(which("aderyn", env) || (only && only.includes("aderyn")) ? ["aderyn"] : []), "solhint");
   if (rustFiles.length || kind === "anchor") names.push("cargo-audit");
   const results = [];
   for (const name of names) {
@@ -258,5 +264,8 @@ export function doctor(env = process.env) {
       if (installed) v = version(bin, ["audit", "--version"]);
     } else if (bin) v = version(bin);
     return { tool, installed, version: v, install: INSTALL[tool] };
-  });
+  }).concat(Object.keys(RETIRED).map((tool) => {
+    const bin = which(tool, env);
+    return { tool, installed: !!bin, version: bin ? version(bin) : "", install: "", retired: RETIRED[tool] };
+  }));
 }

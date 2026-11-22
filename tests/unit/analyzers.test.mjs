@@ -6,7 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { parseSlither, parseSolhint, parseAderyn, parseCargoAudit, which } from "../../plugin/lib/analyzers.mjs";
+import { parseSlither, parseSolhint, parseAderyn, parseCargoAudit, which, doctor, INSTALL } from "../../plugin/lib/analyzers.mjs";
 import { scan, collectFiles, countBySeverity } from "../../plugin/lib/scan.mjs";
 import { toMarkdown, saveReport, summaryLine } from "../../plugin/lib/report.mjs";
 
@@ -77,7 +77,7 @@ test("scanning a project with no analyzers installed: quick checks, missing tool
     assert.equal(r.kind, "foundry");
     assert.ok(r.counts.high >= 5, JSON.stringify(r.counts));
     const status = Object.fromEntries(r.analyzers.map((a) => [a.tool, a.status]));
-    assert.deepEqual(status, { slither: "missing", aderyn: "missing", solhint: "missing" });
+    assert.deepEqual(status, { slither: "missing", solhint: "missing" }, "a retired analyzer is never reported as missing");
     assert.deepEqual(countBySeverity(r.findings), r.counts);
     const md = toMarkdown(r);
     assert.match(md, /# Chain Preflight report/);
@@ -91,6 +91,24 @@ test("scanning a project with no analyzers installed: quick checks, missing tool
     const rc = await scan(clean, { env: bareEnv });
     assert.equal(rc.counts.high + rc.counts.medium, 0, JSON.stringify(rc.findings));
     fs.rmSync(clean, { recursive: true, force: true });
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("a retired analyzer runs only where installed, and is never offered for install", async () => {
+  const report = doctor(bareEnv);
+  assert.deepEqual(report.filter((t) => !t.retired).map((t) => t.tool), Object.keys(INSTALL));
+  const aderyn = report.find((t) => t.tool === "aderyn");
+  assert.equal(aderyn.installed, false);
+  assert.match(aderyn.retired, /Retired by Cyfrin on 2026-11-13/);
+  assert.ok(!Object.keys(INSTALL).includes("aderyn"));
+  for (const cmd of Object.values(INSTALL)) assert.doesNotMatch(cmd, /aderyn|cyfrinup/i);
+  const dir = copySample("evm");
+  try {
+    const asked = await scan(dir, { env: bareEnv, only: ["aderyn"] });
+    assert.deepEqual(asked.analyzers.map((a) => [a.tool, a.status]), [["aderyn", "missing"]]);
+    assert.match(toMarkdown(asked), /aderyn: not installed\. Retired by Cyfrin/);
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

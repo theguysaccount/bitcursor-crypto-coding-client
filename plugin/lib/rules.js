@@ -1,6 +1,6 @@
 // Chain Preflight quick checks: fast, dependency-free pattern checks for Solidity and Anchor (Rust)
 // that run anywhere (the pre-deploy hook, the CLI, the browser checker). They flag code to review;
-// they are not a proof of safety. The real analyzers (Slither, Aderyn, Solhint, cargo-audit) run on
+// they are not a proof of safety. The real analyzers (Slither, Solhint, cargo-audit; Aderyn where installed) run on
 // top of these when they're installed.
 
 export const SEVERITIES = ["high", "medium", "low", "info"];

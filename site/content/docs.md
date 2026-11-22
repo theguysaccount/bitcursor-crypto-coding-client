@@ -41,7 +41,7 @@ The quick checks need nothing. The scan gets much deeper with real analyzers; in
 | Analyzer | For | Install |
 |---|---|---|
 | [Slither](https://github.com/crytic/slither) | Solidity | `pip install slither-analyzer solc-select` (Foundry or Hardhat projects compile with `forge` / `hardhat`; loose files need `solc-select use 0.8.28`) |
-| [Aderyn](https://github.com/Cyfrin/aderyn) | Solidity | `cargo install aderyn`, or Cyfrin's installer |
+| [Aderyn](https://github.com/Cyfrin/aderyn) | Solidity | Retired by Cyfrin on 2026-11-13; no longer installable. An installation you already have still runs. |
 | [Solhint](https://github.com/protofire/solhint) | Solidity | `npm install -g solhint` |
 | [cargo-audit](https://github.com/rustsec/rustsec) | Anchor / Rust | `cargo install cargo-audit` |
 

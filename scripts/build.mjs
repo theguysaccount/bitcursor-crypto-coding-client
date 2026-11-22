@@ -187,7 +187,7 @@ export async function buildSite({ env = process.env, out = path.join(ROOT, "_sit
   const tpl = (n) => fs.readFileSync(path.join(ROOT, "site", "templates", n), "utf8");
   const pages = [{
     path: "/", og: "home", title: "Chain Preflight: smart-contract safety checks your coding agent runs before every deploy",
-    description: "Free, open-source Claude Code and Cursor plugin with Solidity and Anchor security rules and a pre-deploy hook that scans contracts with Slither, Aderyn, Solhint and cargo-audit. Plus a CLI, a GitHub Action and an in-browser checker.",
+    description: "Free, open-source Claude Code and Cursor plugin with Solidity and Anchor security rules and a pre-deploy hook that scans contracts with Slither, Solhint and cargo-audit. Plus a CLI, a GitHub Action and an in-browser checker.",
     body: fill(tpl("home.html"), vars),
     jsonld: [{ "@context": "https://schema.org", "@type": "SoftwareApplication", name: "Chain Preflight", applicationCategory: "DeveloperApplication", operatingSystem: "macOS, Linux, Windows (Node.js 18+)",
       url: `${cfg.siteUrl}/`, softwareVersion: pkg.version, license: "https://opensource.org/licenses/MIT", offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

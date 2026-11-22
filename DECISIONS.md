@@ -12,7 +12,7 @@
    for anything that can lose real money, without slowing local iteration. Configurable per project. The hook
    never approves anything on its own.
 5. **Quick checks plus real analyzers.** Pattern checks run everywhere instantly (including the browser);
-   Slither, Aderyn, Solhint and cargo-audit run when installed, as separate programs (their AGPL/GPL licenses
+   Slither, Solhint and cargo-audit (and Aderyn, retired upstream in November 2026, where it's still installed) run when installed, as separate programs (their AGPL/GPL licenses
    stay theirs; nothing is bundled).
 6. **Fail open on scan errors, loudly.** A broken scan doesn't block a deploy (that would train users to
    disable the hook) but the agent is told the deploy wasn't checked.

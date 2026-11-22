@@ -4,8 +4,8 @@
 
 Chain Preflight is a free, open-source plugin for **Claude Code** and **Cursor**, a CLI and a GitHub Action.
 It gives coding agents Solidity and Anchor security rules to follow, and a pre-deploy hook that scans your
-contracts with built-in quick checks and the open-source analyzers you have installed (Slither, Aderyn,
-Solhint, cargo-audit) the moment a deploy command runs. Local deploys run untouched; testnet deploys with
+contracts with built-in quick checks and the open-source analyzers you have installed (Slither, Solhint,
+cargo-audit, and Aderyn where it's still installed) the moment a deploy command runs. Local deploys run untouched; testnet deploys with
 high-severity findings ask you first; mainnet deploys always ask, and are blocked while high findings remain.
 
 **Try the checker in your browser:** https://theguysaccount.github.io/bitcursor-crypto-coding-client/check/

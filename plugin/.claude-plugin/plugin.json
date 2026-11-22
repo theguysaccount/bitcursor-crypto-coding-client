@@ -10,5 +10,5 @@
   "homepage": "https://theguysaccount.github.io/bitcursor-crypto-coding-client/",
   "repository": "https://github.com/theguysaccount/bitcursor-crypto-coding-client",
   "license": "MIT",
-  "keywords": ["solidity", "anchor", "solana", "ethereum", "smart-contracts", "security", "slither", "aderyn", "foundry", "hardhat", "pre-deploy"]
+  "keywords": ["solidity", "anchor", "solana", "ethereum", "smart-contracts", "security", "slither", "solhint", "foundry", "hardhat", "pre-deploy"]
 }

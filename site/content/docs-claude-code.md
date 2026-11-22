@@ -39,7 +39,7 @@ Restart Claude Code so the hook loads. It needs Node.js 18+ on your PATH.
 Say Claude runs `forge script script/Deploy.s.sol --rpc-url $MAINNET_RPC --broadcast`. Before the command runs, the hook:
 
 1. sees a broadcast to an RPC URL it can't classify (an environment variable), so treats it as **unknown**;
-2. scans the project: quick checks, then Slither, Aderyn and Solhint if they're installed;
+2. scans the project: quick checks, then Slither and Solhint if they're installed (and Aderyn, if you still have it);
 3. saves `.chain-preflight/latest.md`;
 4. if there are high-severity findings, **asks you** in Claude Code's permission prompt, with the reason; Claude also gets the summary and the report path.
 

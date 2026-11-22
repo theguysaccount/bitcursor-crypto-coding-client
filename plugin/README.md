@@ -5,7 +5,7 @@ Smart-contract safety for coding agents, for Claude Code and Cursor:
 - **Pre-deploy hook.** Before a deploy command runs (`forge script --broadcast`, `forge create`,
   `hardhat run|deploy|ignition deploy --network …`, `truffle migrate`, `anchor deploy|upgrade`,
   `solana program deploy`, or an npm/make script that runs one), it scans the project with built-in quick
-  checks and any installed open-source analyzers (Slither, Aderyn, Solhint, cargo-audit), saves a report in
+  checks and any installed open-source analyzers (Slither, Solhint, cargo-audit; Aderyn where it's still installed), saves a report in
   `.chain-preflight/`, and then:
   - local networks (anvil, hardhat, localnet): runs without scanning;
   - testnets: asks you first if there are high-severity findings, otherwise tells the agent what it found;

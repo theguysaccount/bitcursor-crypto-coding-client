@@ -1,4 +1,4 @@
-# Weekly: install the latest Slither, Aderyn, Solhint and cargo-audit, run them on the deliberately
+# Weekly: install the latest Slither, Solhint and cargo-audit (Aderyn was retired upstream), run them on the deliberately
 # vulnerable samples and the safe contract, check the known bugs are still found (and the safe contract
 # stays clean), and record versions and results for the website. Commits only when something changed,
 # then redeploys. An analyzer that fails to install is a warning; one that stops finding known bugs fails.
@@ -47,10 +47,6 @@ jobs:
         uses: taiki-e/install-action@v2
         with:
           tool: cargo-audit
-      - name: Aderyn
-        continue-on-error: true
-        timeout-minutes: 25
-        run: cargo install aderyn --locked
       - name: Lockfile for the Anchor sample (so cargo-audit has something to read)
         continue-on-error: true
         working-directory: samples/anchor
