@@ -1,1 +1,54 @@
-{ "changedOn": null, "analyzers": {} }
+{
+  "changedOn": "2026-11-22T09:45:56.163Z",
+  "analyzers": {
+    "slither": {
+      "version": "0.11.6",
+      "status": "ok",
+      "pass": true,
+      "found": [
+        "arbitrary-send-eth",
+        "constable-states",
+        "controlled-delegatecall",
+        "low-level-calls",
+        "missing-zero-check",
+        "naming-convention",
+        "reentrancy-eth",
+        "solc-version",
+        "tx-origin",
+        "unchecked-lowlevel",
+        "unused-state",
+        "weak-prng"
+      ],
+      "cleanHigh": 0
+    },
+    "aderyn": {
+      "version": "",
+      "status": "missing",
+      "pass": false,
+      "found": [],
+      "cleanHigh": 0
+    },
+    "solhint": {
+      "version": "6.2.5",
+      "status": "ok",
+      "pass": true,
+      "found": [
+        "avoid-low-level-calls",
+        "avoid-tx-origin",
+        "compiler-version",
+        "no-unchecked-calls"
+      ],
+      "cleanHigh": 0
+    },
+    "cargo-audit": {
+      "version": "0.23.0",
+      "status": "ok",
+      "pass": true,
+      "found": [
+        "RUSTSEC-2025-0141",
+        "RUSTSEC-2025-0161",
+        "RUSTSEC-2026-0097"
+      ]
+    }
+  }
+}
