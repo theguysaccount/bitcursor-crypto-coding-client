@@ -1,0 +1,17 @@
+{
+  "description": "Chain Preflight: scan contracts before a deploy command runs (forge script --broadcast, forge create, hardhat run/deploy/ignition --network, truffle migrate, anchor deploy/upgrade, solana program deploy)",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/predeploy.mjs\"",
+            "timeout": 600
+          }
+        ]
+      }
+    ]
+  }
+}

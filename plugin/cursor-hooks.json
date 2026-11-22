@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeShellExecution": [
+      {
+        "command": "node \"${CURSOR_PLUGIN_ROOT}/hooks/predeploy.mjs\"",
+        "timeout": 600,
+        "matcher": "forge|cast|hardhat|truffle|anchor|solana|deploy|migrate|ignition|npm|pnpm|yarn|bun|make"
+      }
+    ]
+  }
+}

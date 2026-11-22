@@ -44,7 +44,6 @@
     "description": "VulnerableVault.sweep(address) (src/VulnerableVault.sol#28-31) sends eth to arbitrary user\n\tDangerous calls:\n\t- to.transfer(address(this).balance) (src/VulnerableVault.sol#30)\n",
     "markdown": "[VulnerableVault.sweep(address)](src/VulnerableVault.sol#L28-L31) sends eth to arbitrary user\n\tDangerous calls:\n\t- [to.transfer(address(this).balance)](src/VulnerableVault.sol#L30)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L28-L31",
-    "id": "153a29a733aa7606a2eda166f4d7e00abd05932ec09dcf4a0ec79bb64d6f4785",
     "check": "arbitrary-send-eth",
     "impact": "High",
     "confidence": "Medium"
@@ -89,7 +88,6 @@
     "description": "VulnerableVault.lottery() (src/VulnerableVault.sol#50-52) uses a weak PRNG: \"uint256(keccak256(bytes)(abi.encodePacked(block.timestamp,msg.sender))) % 10 (src/VulnerableVault.sol#51)\" \n",
     "markdown": "[VulnerableVault.lottery()](src/VulnerableVault.sol#L50-L52) uses a weak PRNG: \"[uint256(keccak256(bytes)(abi.encodePacked(block.timestamp,msg.sender))) % 10](src/VulnerableVault.sol#L51)\" \n",
     "first_markdown_element": "src/VulnerableVault.sol#L50-L52",
-    "id": "131d9f3ce0fc0752b4f4593a8e189bfc32e25f432030d4c325d38cc43dbec715",
     "check": "weak-prng",
     "impact": "High",
     "confidence": "Medium"
@@ -135,7 +133,6 @@
     "description": "VulnerableVault.execute(address,bytes) (src/VulnerableVault.sol#44-47) uses delegatecall to a input-controlled function id\n\t- (ok,None) = impl.delegatecall(data) (src/VulnerableVault.sol#45)\n",
     "markdown": "[VulnerableVault.execute(address,bytes)](src/VulnerableVault.sol#L44-L47) uses delegatecall to a input-controlled function id\n\t- [(ok,None) = impl.delegatecall(data)](src/VulnerableVault.sol#L45)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L44-L47",
-    "id": "3ee0b4dcc451b66b2806a5c4723b363e8dd6d91be6efbe1a0d715a2e039fb029",
     "check": "controlled-delegatecall",
     "impact": "High",
     "confidence": "Medium"
@@ -206,7 +203,6 @@
     "description": "Reentrancy in VulnerableVault.withdraw() (src/VulnerableVault.sol#20-25):\n\tExternal calls:\n\t- (ok,None) = msg.sender.call{value: amount}() (src/VulnerableVault.sol#22)\n\tState variables written after the call(s):\n\t- balances[msg.sender] = 0 (src/VulnerableVault.sol#24)\n\tVulnerableVault.balances (src/VulnerableVault.sol#6) can be used in cross function reentrancies:\n\t- VulnerableVault.balances (src/VulnerableVault.sol#6)\n\t- VulnerableVault.deposit() (src/VulnerableVault.sol#15-17)\n\t- VulnerableVault.withdraw() (src/VulnerableVault.sol#20-25)\n",
     "markdown": "Reentrancy in [VulnerableVault.withdraw()](src/VulnerableVault.sol#L20-L25):\n\tExternal calls:\n\t- [(ok,None) = msg.sender.call{value: amount}()](src/VulnerableVault.sol#L22)\n\tState variables written after the call(s):\n\t- [balances[msg.sender] = 0](src/VulnerableVault.sol#L24)\n\t[VulnerableVault.balances](src/VulnerableVault.sol#L6) can be used in cross function reentrancies:\n\t- [VulnerableVault.balances](src/VulnerableVault.sol#L6)\n\t- [VulnerableVault.deposit()](src/VulnerableVault.sol#L15-L17)\n\t- [VulnerableVault.withdraw()](src/VulnerableVault.sol#L20-L25)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L20-L25",
-    "id": "c5574ffe6fc2d18f62e8899a229bb7192ad769a79307c2c8e8b6d8678d56f194",
     "check": "reentrancy-eth",
     "impact": "High",
     "confidence": "Medium"
@@ -252,7 +248,6 @@
     "description": "VulnerableVault.sweep(address) (src/VulnerableVault.sol#28-31) uses tx.origin for authorization: require(bool,string)(tx.origin == owner,not owner) (src/VulnerableVault.sol#29)\n",
     "markdown": "[VulnerableVault.sweep(address)](src/VulnerableVault.sol#L28-L31) uses tx.origin for authorization: [require(bool,string)(tx.origin == owner,not owner)](src/VulnerableVault.sol#L29)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L28-L31",
-    "id": "4e605e7ef887133f1d7affcd92816de3bc060c24ec971185eff38da8413b12fa",
     "check": "tx-origin",
     "impact": "Medium",
     "confidence": "Medium"
@@ -297,7 +292,6 @@
     "description": "VulnerableVault.ping(address) (src/VulnerableVault.sol#39-41) ignores return value by target.call(abi.encodeWithSignature(ping())) (src/VulnerableVault.sol#40)\n",
     "markdown": "[VulnerableVault.ping(address)](src/VulnerableVault.sol#L39-L41) ignores return value by [target.call(abi.encodeWithSignature(ping()))](src/VulnerableVault.sol#L40)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L39-L41",
-    "id": "e93c02ef4ee93ce653fdcf2efd275a087553330ec96c3d506299d226f7688320",
     "check": "unchecked-lowlevel",
     "impact": "Medium",
     "confidence": "Medium"
@@ -340,7 +334,6 @@
     "description": "VulnerableVault.initialize(address)._owner (src/VulnerableVault.sol#11) lacks a zero-check on :\n\t\t- owner = _owner (src/VulnerableVault.sol#12)\n",
     "markdown": "[VulnerableVault.initialize(address)._owner](src/VulnerableVault.sol#L11) lacks a zero-check on :\n\t\t- [owner = _owner](src/VulnerableVault.sol#L12)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L11",
-    "id": "17106d80d4d39690b75a19986fc10aa92df735517783a01c56198e1e3740bab5",
     "check": "missing-zero-check",
     "impact": "Low",
     "confidence": "Medium"
@@ -383,7 +376,6 @@
     "description": "VulnerableVault.sweep(address).to (src/VulnerableVault.sol#28) lacks a zero-check on :\n\t\t- to.transfer(address(this).balance) (src/VulnerableVault.sol#30)\n",
     "markdown": "[VulnerableVault.sweep(address).to](src/VulnerableVault.sol#L28) lacks a zero-check on :\n\t\t- [to.transfer(address(this).balance)](src/VulnerableVault.sol#L30)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L28",
-    "id": "63d31cf601b5ca439910a499554b4e89f78901b3bd048fe3252b2c09475c3c09",
     "check": "missing-zero-check",
     "impact": "Low",
     "confidence": "Medium"
@@ -426,7 +418,6 @@
     "description": "VulnerableVault.setOwner(address).newOwner (src/VulnerableVault.sol#34) lacks a zero-check on :\n\t\t- owner = newOwner (src/VulnerableVault.sol#35)\n",
     "markdown": "[VulnerableVault.setOwner(address).newOwner](src/VulnerableVault.sol#L34) lacks a zero-check on :\n\t\t- [owner = newOwner](src/VulnerableVault.sol#L35)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L34",
-    "id": "68801346f17b949ee414c1ee3cd2f558303cea258937acb275bbfb3a8a59cd8e",
     "check": "missing-zero-check",
     "impact": "Low",
     "confidence": "Medium"
@@ -469,7 +460,6 @@
     "description": "VulnerableVault.ping(address).target (src/VulnerableVault.sol#39) lacks a zero-check on :\n\t\t- target.call(abi.encodeWithSignature(ping())) (src/VulnerableVault.sol#40)\n",
     "markdown": "[VulnerableVault.ping(address).target](src/VulnerableVault.sol#L39) lacks a zero-check on :\n\t\t- [target.call(abi.encodeWithSignature(ping()))](src/VulnerableVault.sol#L40)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L39",
-    "id": "9313cae711a99eec696e326312a1491bf7e8625c2ff0dfce2498ccec475ec56d",
     "check": "missing-zero-check",
     "impact": "Low",
     "confidence": "Medium"
@@ -512,7 +502,6 @@
     "description": "VulnerableVault.execute(address,bytes).impl (src/VulnerableVault.sol#44) lacks a zero-check on :\n\t\t- (ok,None) = impl.delegatecall(data) (src/VulnerableVault.sol#45)\n",
     "markdown": "[VulnerableVault.execute(address,bytes).impl](src/VulnerableVault.sol#L44) lacks a zero-check on :\n\t\t- [(ok,None) = impl.delegatecall(data)](src/VulnerableVault.sol#L45)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L44",
-    "id": "ab05a66f09800c39a9e89cfffcfa24dd23d9a2665e17bcbeff3949875a2072b3",
     "check": "missing-zero-check",
     "impact": "Low",
     "confidence": "Medium"
@@ -539,7 +528,6 @@
     "description": "Version constraint ^0.8.20 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)\n\t- VerbatimInvalidDeduplication\n\t- FullInlinerNonExpressionSplitArgumentEvaluationOrder\n\t- MissingSideEffectsOnSelectorAccess.\nIt is used by:\n\t- ^0.8.20 (src/VulnerableVault.sol#3)\n",
     "markdown": "Version constraint ^0.8.20 contains known severe issues (https://solidity.readthedocs.io/en/latest/bugs.html)\n\t- VerbatimInvalidDeduplication\n\t- FullInlinerNonExpressionSplitArgumentEvaluationOrder\n\t- MissingSideEffectsOnSelectorAccess.\nIt is used by:\n\t- [^0.8.20](src/VulnerableVault.sol#L3)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L3",
-    "id": "05785e05b36465305dd8fcb5c95fb873343c5703bf42db72e087774addc1fe9c",
     "check": "solc-version",
     "impact": "Informational",
     "confidence": "High"
@@ -587,7 +575,6 @@
     "description": "Low level call in VulnerableVault.withdraw() (src/VulnerableVault.sol#20-25):\n\t- (ok,None) = msg.sender.call{value: amount}() (src/VulnerableVault.sol#22)\n",
     "markdown": "Low level call in [VulnerableVault.withdraw()](src/VulnerableVault.sol#L20-L25):\n\t- [(ok,None) = msg.sender.call{value: amount}()](src/VulnerableVault.sol#L22)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L20-L25",
-    "id": "1767e344ca33eea26b3dd3899076559e92cee719824f1cc4f52773ccc2e61c1e",
     "check": "low-level-calls",
     "impact": "Informational",
     "confidence": "High"
@@ -633,7 +620,6 @@
     "description": "Low level call in VulnerableVault.execute(address,bytes) (src/VulnerableVault.sol#44-47):\n\t- (ok,None) = impl.delegatecall(data) (src/VulnerableVault.sol#45)\n",
     "markdown": "Low level call in [VulnerableVault.execute(address,bytes)](src/VulnerableVault.sol#L44-L47):\n\t- [(ok,None) = impl.delegatecall(data)](src/VulnerableVault.sol#L45)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L44-L47",
-    "id": "c2760c34b2e0eada3a4a2bc2b395fcb603c1bdb8dbf6845efd0dc42e522e0437",
     "check": "low-level-calls",
     "impact": "Informational",
     "confidence": "High"
@@ -678,7 +664,6 @@
     "description": "Low level call in VulnerableVault.ping(address) (src/VulnerableVault.sol#39-41):\n\t- target.call(abi.encodeWithSignature(ping())) (src/VulnerableVault.sol#40)\n",
     "markdown": "Low level call in [VulnerableVault.ping(address)](src/VulnerableVault.sol#L39-L41):\n\t- [target.call(abi.encodeWithSignature(ping()))](src/VulnerableVault.sol#L40)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L39-L41",
-    "id": "da922efd6c94e0fa5f86035ba1e43ccf0dbee71873ffb7e06fc6a68a017f4c09",
     "check": "low-level-calls",
     "impact": "Informational",
     "confidence": "High"
@@ -709,7 +694,6 @@
     "description": "Parameter VulnerableVault.initialize(address)._owner (src/VulnerableVault.sol#11) is not in mixedCase\n",
     "markdown": "Parameter [VulnerableVault.initialize(address)._owner](src/VulnerableVault.sol#L11) is not in mixedCase\n",
     "first_markdown_element": "src/VulnerableVault.sol#L11",
-    "id": "7e61273fa771cd1f59c8e2949c7b80e193c6d2886f8ab7cc659b1f7381eb2639",
     "check": "naming-convention",
     "impact": "Informational",
     "confidence": "High"
@@ -800,7 +784,6 @@
     "description": "VulnerableVault.initialized (src/VulnerableVault.sol#8) is never used in VulnerableVault (src/VulnerableVault.sol#5-53)\n",
     "markdown": "[VulnerableVault.initialized](src/VulnerableVault.sol#L8) is never used in [VulnerableVault](src/VulnerableVault.sol#L5-L53)\n",
     "first_markdown_element": "src/VulnerableVault.sol#L8",
-    "id": "bf7c0984a00110b70a7d23e0a02480171a1700ddf24f7cfaf3193f347a3596ca",
     "check": "unused-state",
     "impact": "Informational",
     "confidence": "High"
@@ -827,7 +810,6 @@
     "description": "VulnerableVault.initialized (src/VulnerableVault.sol#8) should be constant \n",
     "markdown": "[VulnerableVault.initialized](src/VulnerableVault.sol#L8) should be constant \n",
     "first_markdown_element": "src/VulnerableVault.sol#L8",
-    "id": "d2fce45d1b40903dee62a4e529f6b491dc8a2b6961d5e9e68aa3e7848ebe6241",
     "check": "constable-states",
     "impact": "Optimization",
     "confidence": "High"

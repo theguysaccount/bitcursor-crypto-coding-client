@@ -1,0 +1,21 @@
+name: False positive or missed bug
+description: A quick check or analyzer result that's wrong, or a vulnerable pattern Chain Preflight didn't flag
+labels: ["accuracy", "triage"]
+body:
+  - type: input
+    id: rule
+    attributes:
+      label: Rule id or analyzer detector (if any)
+  - type: textarea
+    id: code
+    attributes:
+      label: A minimal code sample (no private keys, nothing confidential)
+      render: solidity
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should have happened?
+    validations:
+      required: true

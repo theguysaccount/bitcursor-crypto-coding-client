@@ -126,7 +126,8 @@ export function render(md) {
         } else break;
       }
       const tag = ordered ? "ol" : "ul";
-      out.push(`<${tag}>${items.map((it) => `<li>${inline(it.text)}${it.sub.length ? `<ul>${it.sub.map((s) => `<li>${inline(s)}</li>`).join("")}</ul>` : ""}</li>`).join("")}</${tag}>`);
+      const box = (t) => (/^\[ \]\s/.test(t) ? `<span class="box" aria-hidden="true">☐</span> ${inline(t.slice(4))}` : inline(t));
+      out.push(`<${tag}${items.some((it) => /^\[ \]\s/.test(it.text)) ? ' class="checklist"' : ""}>${items.map((it) => `<li>${box(it.text)}${it.sub.length ? `<ul>${it.sub.map((s) => `<li>${inline(s)}</li>`).join("")}</ul>` : ""}</li>`).join("")}</${tag}>`);
       continue;
     }
     if (line.trim() === "") {

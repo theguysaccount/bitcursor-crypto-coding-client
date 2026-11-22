@@ -1,0 +1,11 @@
+<div class="wrap doc"><article class="prose" style="grid-column:1/-1">
+  <h1>{{ruleCount}} security rules for Solidity and Anchor</h1>
+  <p>These are the quick checks Chain Preflight runs everywhere: in the pre-deploy hook, the CLI, the GitHub Action and the <a href="{{base}}/check/">in-browser checker</a>. Each page explains why the pattern is dangerous, shows vulnerable and fixed code, and lists the matching detectors in Slither, Aderyn, Solhint and the Sealevel attacks catalogue. The analyzers add many more checks on top of these.</p>
+  <h2 id="solidity">Solidity (EVM)</h2>
+  <ul class="rule-list">{{solRules}}</ul>
+  <h2 id="anchor">Anchor and Solana (Rust)</h2>
+  <ul class="rule-list">{{anchorRules}}</ul>
+  <h2 id="any">Any project</h2>
+  <ul class="rule-list">{{anyRules}}</ul>
+  <p class="note">Machine-readable: <a href="{{base}}/rules.json">rules.json</a>.</p>
+</article></div>

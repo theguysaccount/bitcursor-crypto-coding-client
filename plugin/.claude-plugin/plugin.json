@@ -1,0 +1,14 @@
+{
+  "name": "chain-preflight",
+  "displayName": "Chain Preflight",
+  "version": "0.1.0",
+  "description": "Smart-contract safety for coding agents: Solidity and Anchor security rules, and a pre-deploy check that scans your contracts with open-source analyzers before forge, hardhat, anchor or solana deploys run.",
+  "author": {
+    "name": "Chain Preflight contributors",
+    "url": "https://github.com/theguysaccount/bitcursor-crypto-coding-client"
+  },
+  "homepage": "https://theguysaccount.github.io/bitcursor-crypto-coding-client/",
+  "repository": "https://github.com/theguysaccount/bitcursor-crypto-coding-client",
+  "license": "MIT",
+  "keywords": ["solidity", "anchor", "solana", "ethereum", "smart-contracts", "security", "slither", "aderyn", "foundry", "hardhat", "pre-deploy"]
+}

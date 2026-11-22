@@ -1,0 +1,16 @@
+{
+  "name": "chain-preflight",
+  "owner": {
+    "name": "Chain Preflight contributors"
+  },
+  "metadata": {
+    "description": "Chain Preflight: smart-contract safety rules and a pre-deploy analyzer check."
+  },
+  "plugins": [
+    {
+      "name": "chain-preflight",
+      "source": "plugin",
+      "description": "Solidity and Anchor security rules, and a pre-deploy check that scans contracts with open-source analyzers."
+    }
+  ]
+}

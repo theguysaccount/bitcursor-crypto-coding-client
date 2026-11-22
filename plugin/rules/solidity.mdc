@@ -1,0 +1,12 @@
+---
+description: Security rules for Solidity smart contracts (access control, reentrancy, external calls, oracles, signatures, upgradeability)
+globs: **/*.sol
+alwaysApply: false
+---
+
+When writing or reviewing Solidity, follow the `solidity-security` skill: pin the compiler (>= 0.8), check
+the caller on every privileged function (never `tx.origin`), update state before external calls and guard
+them against reentrancy, check every low-level call and use SafeERC20, never `delegatecall` caller-supplied
+addresses, don't derive randomness from block values or prices from AMM reserves, use EIP-712 signatures with
+nonces and deadlines, protect initializers. Before a deploy, run the Chain Preflight scan
+(`chain-preflight scan . --report`). Static analysis is not an audit.

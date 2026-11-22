@@ -121,7 +121,8 @@ test("Cargo.toml: overflow checks in release builds", () => {
 });
 
 test("private keys and keypairs are caught, placeholders are not", () => {
-  const key = "4c0883a69102937d6231471b5dbb6204fe5129617082792ae468d01a3f362318";
+  // Built at runtime so no key-shaped literal sits in the repository.
+  const key = Array.from({ length: 32 }, (_, i) => ((i * 37 + 11) % 256).toString(16).padStart(2, "0")).join("");
   const f = checkSecrets(`const PRIVATE_KEY = "0x${key}";`, "deploy.js");
   assert.equal(f.length, 1);
   assert.ok(!f[0].snippet.includes(key), "the key itself never appears in a report");

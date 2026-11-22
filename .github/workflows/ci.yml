@@ -1,0 +1,43 @@
+# Tests for pull requests and branches other than main, including the GitHub Action itself.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches-ignore: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - run: node --test tests/unit/*.test.mjs
+      - run: node scripts/check-plugin.mjs
+      - run: node scripts/build.mjs
+      - run: node tests/e2e/run.mjs
+
+  action:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - name: The action passes a safe contract
+        uses: ./
+        with:
+          path: samples/evm-clean
+          analyzers: "false"
+      - name: The action fails a vulnerable contract
+        id: vulnerable
+        continue-on-error: true
+        uses: ./
+        with:
+          path: samples/evm
+          analyzers: "false"
+      - run: test "${{ steps.vulnerable.outcome }}" = "failure"

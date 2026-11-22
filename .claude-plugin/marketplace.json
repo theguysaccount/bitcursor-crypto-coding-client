@@ -1,0 +1,17 @@
+{
+  "name": "chain-preflight",
+  "description": "Chain Preflight: smart-contract safety rules and a pre-deploy analyzer check for Claude Code.",
+  "owner": {
+    "name": "Chain Preflight contributors",
+    "url": "https://github.com/theguysaccount/bitcursor-crypto-coding-client"
+  },
+  "plugins": [
+    {
+      "name": "chain-preflight",
+      "source": "./plugin",
+      "description": "Solidity and Anchor security rules, and a pre-deploy check that scans contracts with open-source analyzers before a deploy runs.",
+      "category": "security",
+      "tags": ["solidity", "anchor", "smart-contracts", "security"]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+---
+description: Security rules for Solana programs written with Anchor (account validation, signers, PDAs, CPIs, closing accounts, arithmetic)
+globs: programs/**/*.rs
+alwaysApply: false
+---
+
+When writing or reviewing Anchor programs, follow the `anchor-security` skill: typed accounts over
+`AccountInfo` (each unchecked one needs a `/// CHECK:` reason and real checks), `Signer<'info>` for every
+authority with `has_one`/constraints tying it to state, canonical stored bumps for PDAs, `Program<'info, T>`
+or an explicit program-id check before any CPI, `close = destination` to close accounts, checked arithmetic
+and `overflow-checks = true` in release builds, avoid `init_if_needed`. Before a deploy, run the Chain
+Preflight scan. Static analysis is not an audit.

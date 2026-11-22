@@ -1,0 +1,45 @@
+<div class="wrap" style="padding-top:28px;padding-bottom:40px">
+  <h1 style="margin:0 0 8px;font-size:clamp(26px,4vw,36px);letter-spacing:-.02em">Check a contract in your browser</h1>
+  <p class="note" style="margin:0 0 18px;max-width:52em">Paste Solidity, an Anchor program or a <code>Cargo.toml</code>. The same quick checks as the plugin and CLI run right here; your code never leaves the page. The full pre-deploy scan adds Slither, Aderyn, Solhint and cargo-audit on your machine.</p>
+  <div class="checker">
+    <div>
+      <div class="toolbar">
+        <label for="lang" class="sr-only" style="position:absolute;left:-999px">Language</label>
+        <select id="lang" aria-label="Language"><option value="auto">Detect language</option><option value="solidity">Solidity</option><option value="anchor">Anchor / Rust</option><option value="cargo">Cargo.toml</option></select>
+        <button class="btn primary small" type="button" id="check">Check</button>
+        <button class="btn small" type="button" id="share">Copy share link</button>
+      </div>
+      <label for="code" style="position:absolute;left:-999px">Code to check</label>
+      <textarea id="code" spellcheck="false" autocapitalize="off" autocomplete="off">// Paste a contract here, or load a sample below.
+pragma solidity ^0.8.20;
+
+contract Example {
+    address public owner;
+    mapping(address => uint256) public balances;
+
+    function withdraw() external {
+        uint256 amount = balances[msg.sender];
+        (bool ok, ) = msg.sender.call{value: amount}("");
+        require(ok);
+        balances[msg.sender] = 0;
+    }
+
+    function setOwner(address newOwner) external {
+        owner = newOwner;
+    }
+}</textarea>
+      <div class="toolbar" style="margin-top:10px">
+        <span class="note">Samples:</span>
+        <button class="btn small" type="button" id="sample-evm">Vulnerable vault (Solidity)</button>
+        <button class="btn small" type="button" id="sample-anchor">Vulnerable vault (Anchor)</button>
+        <button class="btn small" type="button" id="sample-clean">Safe vault</button>
+      </div>
+      <p class="note" id="share-status" role="status"></p>
+    </div>
+    <div>
+      <p class="summary" id="summary" role="status" aria-live="polite"></p>
+      <div class="results" id="results"></div>
+      <div class="disclaimer">Quick checks are pattern matches: a hit means "look here", a clean result is no guarantee. This is not an audit and not financial advice.</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+name: Chain Preflight
+description: Scan Solidity and Anchor contracts with quick checks and open-source analyzers before a deploy; fail on high-severity findings.
+author: Chain Preflight contributors
+branding:
+  icon: shield
+  color: green
+inputs:
+  path:
+    description: Project folder to scan
+    default: "."
+  fail-on:
+    description: Fail the step on findings of this severity or worse (high, medium, low, none)
+    default: high
+  analyzers:
+    description: Run the analyzers installed on the runner (Slither, Aderyn, Solhint, cargo-audit). Install them in earlier steps.
+    default: "true"
+outputs:
+  report:
+    description: Path of the Markdown report
+    value: ${{ steps.scan.outputs.report }}
+runs:
+  using: composite
+  steps:
+    - id: scan
+      shell: bash
+      env:
+        CP_PATH: ${{ inputs.path }}
+        CP_FAIL_ON: ${{ inputs.fail-on }}
+        CP_ANALYZERS: ${{ inputs.analyzers }}
+      run: |
+        report="$RUNNER_TEMP/chain-preflight.md"
+        echo "report=$report" >> "$GITHUB_OUTPUT"
+        extra=""
+        [ "$CP_ANALYZERS" = "false" ] && extra="--no-analyzers"
+        set +e
+        node "$GITHUB_ACTION_PATH/plugin/bin/preflight.mjs" scan "$CP_PATH" --fail-on "$CP_FAIL_ON" $extra > "$report"
+        status=$?
+        set -e
+        cat "$report"
+        cat "$report" >> "$GITHUB_STEP_SUMMARY"
+        exit $status

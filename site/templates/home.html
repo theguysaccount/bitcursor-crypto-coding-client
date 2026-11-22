@@ -1,0 +1,64 @@
+<section class="hero"><div class="wrap">
+  <div>
+    <p class="eyebrow">Free and open source · Claude Code, Cursor, CLI, GitHub Action</p>
+    <h1>Your coding agent writes the contract. <span>Preflight checks it before it ships.</span></h1>
+    <p class="lede">Chain Preflight gives AI coding agents Solidity and Anchor security rules to follow while they write, and a pre-deploy hook that scans your contracts with open-source analyzers (Slither, Aderyn, Solhint, cargo-audit) the moment a deploy command runs. Mainnet deploys with high-severity findings are stopped until a person decides.</p>
+    <div class="actions">
+      <a class="btn primary" href="{{base}}/check/">Check a contract now</a>
+      <a class="btn" href="#install">Install</a>
+    </div>
+    <p class="small-print">Runs on your machine. No account, no token, no trading, no financial advice: a code-safety tool for developers.</p>
+  </div>
+  <div class="brief-card" aria-label="What the hook says before a mainnet deploy">
+    <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+    <pre>{{hero}}</pre>
+    <p class="caption">Generated when this site was built, by running the hook's own code on the project's deliberately vulnerable sample contract (quick checks only; installed analyzers add more).</p>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <h2>How it works</h2>
+  <div class="grid">
+    <div class="card"><span class="step-n">1</span><h3>Rules while it writes</h3><p>Skills for Claude Code and rules for Cursor teach the agent the patterns that lose funds: access control, reentrancy, unchecked calls, oracle manipulation, signature replay, missing signers, arbitrary CPIs.</p></div>
+    <div class="card"><span class="step-n">2</span><h3>A scan before every deploy</h3><p>When the agent runs <code>forge script --broadcast</code>, <code>hardhat … --network</code>, <code>anchor deploy</code> or <code>solana program deploy</code>, the hook scans the project first: {{ruleCount}} built-in quick checks plus whichever analyzers you have installed.</p></div>
+    <div class="card"><span class="step-n">3</span><h3>A human decides</h3><p>Local deploys run untouched. Testnet deploys with high findings ask you first. Mainnet deploys always ask, and are blocked when high findings remain. The agent gets the report and proposes fixes.</p></div>
+  </div>
+</div></section>
+
+<section class="band" id="install"><div class="wrap">
+  <h2>Install</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Claude Code</h3>
+      <pre><code>/plugin marketplace add {{repoSlug}}
+/plugin install chain-preflight@chain-preflight</code></pre>
+      <p>Then <code>/chain-preflight:audit</code> any time. The hook runs on its own. <a href="{{base}}/docs/claude-code/">Details</a></p>
+    </div>
+    <div class="card">
+      <h3>Cursor</h3>
+      <p>Import the repository as a plugin (it has a Cursor marketplace manifest with the hook, skills and rules), or add the hook to <code>.cursor/hooks.json</code> by hand. <a href="{{base}}/docs/cursor/">Cursor setup</a></p>
+    </div>
+    <div class="card">
+      <h3>Command line</h3>
+      <pre><code>npx -y github:{{repoSlug}}#v{{version}} scan .</code></pre>
+      <p>Exit code 1 on high findings. <code>doctor</code> shows which analyzers are installed. <a href="{{base}}/docs/">CLI docs</a></p>
+    </div>
+    <div class="card">
+      <h3>GitHub Actions</h3>
+      <pre><code>- uses: {{repoSlug}}@v{{version}}
+  with:
+    fail-on: high</code></pre>
+      <p>Put it in front of your deploy job. <a href="{{base}}/docs/github-action/">Workflow example</a></p>
+    </div>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <h2>What it is, and isn't</h2>
+  <ul class="tick">
+    <li>A safety net for developers and their coding agents: pattern checks, open-source analyzers, and a human checkpoint before deploys.</li>
+    <li>Not an audit. Static analysis finds known bug classes; it can't prove a contract is safe. Get a professional audit before deploying code that will hold value.</li>
+    <li>Not a wallet, a token, a trading tool or financial advice. It never sees keys, signs or sends transactions, and sends nothing anywhere.</li>
+  </ul>
+  <p><a href="{{base}}/docs/limits/">Limits and false positives</a> · <a href="{{base}}/rules/">All {{ruleCount}} rules</a> · <a href="{{base}}/docs/analyzers/">Analyzers and versions</a></p>
+</div></section>
