@@ -1,5 +1,5 @@
 {
-  "changedOn": "2026-11-22T09:45:56.163Z",
+  "changedOn": "2026-11-22T09:51:49.451Z",
   "analyzers": {
     "slither": {
       "version": "0.11.6",
@@ -19,13 +19,6 @@
         "unused-state",
         "weak-prng"
       ],
-      "cleanHigh": 0
-    },
-    "aderyn": {
-      "version": "",
-      "status": "missing",
-      "pass": false,
-      "found": [],
       "cleanHigh": 0
     },
     "solhint": {
