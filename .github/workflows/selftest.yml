@@ -7,7 +7,6 @@ on:
   schedule:
     - cron: "29 9 * * 1"     # Mondays 09:29 UTC
     - cron: "53 21 * * 4"    # Thursdays 21:53 UTC
-    - cron: "23,53 * 22-24 11 *"  # TEMPORARY, 22-24 Nov only: proves the schedule trigger, then gets removed
   workflow_dispatch:
 
 permissions:

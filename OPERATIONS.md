@@ -21,9 +21,10 @@ users' code never reaches this project.
 | CI | `ci.yml` | pull requests, other branches | The deploy's tests plus the action test | |
 | Triage | issue forms | new issues | Bug and false-result forms label issues (`bug`/`accuracy` + `triage`) | |
 
-**Temporary line to remove:** `selftest.yml` has a third cron, `23,53 * 22-24 11 *`, added on
-2026-11-22 to prove the schedule trigger. It can only fire on 22 to 24 November. Delete it once a
-schedule-triggered run has passed (it would come back on the same dates next year).
+**Schedule trigger verified:** the first schedule-triggered self-test passed on 2026-11-22
+([run 45049467162](https://github.com/theguysaccount/bitcursor-crypto-coding-client/actions/runs/45049467162)), from a temporary cron limited to
+22 to 24 November that was then removed. New or edited crons on this account have taken about 8 hours to
+fire for the first time, so don't read a quiet first day as a broken schedule.
 
 ## What to watch
 
