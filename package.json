@@ -1,6 +1,6 @@
 {
   "name": "chain-preflight",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Smart-contract safety for AI coding agents: Solidity and Anchor rules, and a pre-deploy check that runs open-source analyzers. Claude Code and Cursor plugin, CLI and GitHub Action.",
   "type": "module",
   "license": "MIT",

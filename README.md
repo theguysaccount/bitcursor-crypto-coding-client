@@ -31,14 +31,14 @@ and rules by hand: [Cursor setup](https://theguysaccount.github.io/bitcursor-cry
 **Command line** (nothing to install):
 
 ```bash
-npx -y github:theguysaccount/bitcursor-crypto-coding-client#v0.1.0 scan .
-npx -y github:theguysaccount/bitcursor-crypto-coding-client#v0.1.0 doctor
+npx -y github:theguysaccount/bitcursor-crypto-coding-client#v0.1.1 scan .
+npx -y github:theguysaccount/bitcursor-crypto-coding-client#v0.1.1 doctor
 ```
 
 **GitHub Actions:**
 
 ```yaml
-- uses: theguysaccount/bitcursor-crypto-coding-client@v0.1.0
+- uses: theguysaccount/bitcursor-crypto-coding-client@v0.1.1
   with:
     fail-on: high
 ```

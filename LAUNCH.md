@@ -5,8 +5,8 @@ Machine-driven: no posts, outreach, hackathon visits or ads.
 ## Live
 - Site, checker, rules: https://theguysaccount.github.io/bitcursor-crypto-coding-client/
 - Claude Code: `/plugin marketplace add theguysaccount/bitcursor-crypto-coding-client` → `/plugin install chain-preflight@chain-preflight`
-- CLI: `npx -y github:theguysaccount/bitcursor-crypto-coding-client#v0.1.0 scan .`
-- Action: `uses: theguysaccount/bitcursor-crypto-coding-client@v0.1.0`
+- CLI: `npx -y github:theguysaccount/bitcursor-crypto-coding-client#v0.1.1 scan .`
+- Action: `uses: theguysaccount/bitcursor-crypto-coding-client@v0.1.1`
 
 ## Production deploy and domain
 OPERATIONS.md key 1 (one setting, `SITE_URL`, plus DNS). Nothing here changes DNS.

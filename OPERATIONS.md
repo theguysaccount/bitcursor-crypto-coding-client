@@ -7,8 +7,8 @@ users' code never reaches this project.
 **Live:** https://theguysaccount.github.io/bitcursor-crypto-coding-client/
 **Repo:** https://github.com/theguysaccount/bitcursor-crypto-coding-client
 **Install:** `/plugin marketplace add theguysaccount/bitcursor-crypto-coding-client`, then
-`/plugin install chain-preflight@chain-preflight` (Claude Code); `npx -y github:theguysaccount/bitcursor-crypto-coding-client#v0.1.0 scan .` (CLI);
-`uses: theguysaccount/bitcursor-crypto-coding-client@v0.1.0` (GitHub Actions)
+`/plugin install chain-preflight@chain-preflight` (Claude Code); `npx -y github:theguysaccount/bitcursor-crypto-coding-client#v0.1.1 scan .` (CLI);
+`uses: theguysaccount/bitcursor-crypto-coding-client@v0.1.1` (GitHub Actions)
 
 ## Automated jobs
 
