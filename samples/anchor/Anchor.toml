@@ -1,0 +1,11 @@
+[toolchain]
+
+[features]
+resolution = true
+
+[programs.localnet]
+vault = "Vau1t11111111111111111111111111111111111111"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"

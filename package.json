@@ -1,0 +1,14 @@
+{
+  "name": "chain-preflight",
+  "version": "0.1.0",
+  "description": "Smart-contract safety for AI coding agents: Solidity and Anchor rules, and a pre-deploy check that runs open-source analyzers. Claude Code and Cursor plugin, CLI and GitHub Action.",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
+  "homepage": "https://theguysaccount.github.io/bitcursor-crypto-coding-client/",
+  "repository": { "type": "git", "url": "git+https://github.com/theguysaccount/bitcursor-crypto-coding-client.git" },
+  "bin": { "chain-preflight": "plugin/bin/preflight.mjs" },
+  "files": ["plugin/", "README.md", "LICENSE"],
+  "scripts": { "test": "node --test tests/unit/*.test.mjs", "build": "node scripts/build.mjs", "e2e": "node tests/e2e/run.mjs" },
+  "engines": { "node": ">=18" }
+}

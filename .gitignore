@@ -1,0 +1,11 @@
+_site/
+node_modules/
+.chain-preflight/
+out/
+cache/
+target/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.tmp
